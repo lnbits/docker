@@ -1,1 +1,1 @@
-nginx/conf/app.conf
+nginx/conf/*.conf
