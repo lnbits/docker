@@ -53,3 +53,12 @@ sh create_cert.sh mydomain.com
 cd nginx
 sh renew_cert.sh mydomain.com
 ```
+
+## Update LNbits enviroment
+```sh
+git pull
+cd docker/fakewallet # or docker/phoenixd
+docker compose pull
+docker compose down
+docker compose up -d
+```
