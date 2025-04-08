@@ -1,0 +1,42 @@
+services:
+  lnbits:
+    image: lnbits/lnbits:v1.0.0-rc10
+    hostname: lnbits
+    depends_on:
+      - postgres
+    restart: on-failure
+    environment:
+      LNBITS_HOST: lnbits
+      LNBITS_PORT: 5100
+      LNBITS_DATABASE_URL: postgres://lnbits:lnbits@postgres:5432/lnbits
+      LNBITS_BACKEND_WALLET_CLASS: PhoenixdWallet
+      PHOENIXD_API_ENDPOINT: http://phoenixd:9740/
+      PHOENIXD_API_PASSWORD: lnbits
+    ports:
+      - 5100:5100
+    volumes:
+      - lnbits-data:/app/data
+  phoenixd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: phoenixd
+    restart: on-failure
+    entrypoint: "./phoenixd --http-bind-ip=phoenixd --http-password=lnbits"
+    ports:
+      - 9740:9740
+    volumes:
+      - phoenixd-data:/data
+  postgres:
+    image: postgres:latest
+    restart: on-failure
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: lnbits
+      POSTGRES_PASSWORD: lnbits
+      POSTGRES_DB: lnbits
+
+volumes:
+  lnbits-data:
+  phoenixd-data:

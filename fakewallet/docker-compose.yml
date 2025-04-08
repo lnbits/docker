@@ -1,0 +1,27 @@
+services:
+  lnbits:
+    image: lnbits/lnbits:v1.0.0-rc10
+    hostname: lnbits
+    depends_on:
+      - postgres
+    restart: on-failure
+    environment:
+      LNBITS_HOST: lnbits
+      LNBITS_PORT: 5100
+      LNBITS_BACKEND_WALLET_CLASS: FakeWallet
+      LNBITS_DATABASE_URL: postgres://lnbits:lnbits@postgres:5432/lnbits
+    ports:
+      - 5100:5100
+    volumes:
+      - lnbits-data:/app/data
+  postgres:
+    image: postgres:latest
+    restart: on-failure
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: lnbits
+      POSTGRES_PASSWORD: lnbits
+      POSTGRES_DB: lnbits
+volumes:
+  lnbits-data:
