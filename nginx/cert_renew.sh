@@ -1,2 +1,2 @@
 #!/bin/
-docker-compose run --rm certbot renew
+docker compose run --rm certbot renew
