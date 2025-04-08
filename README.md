@@ -3,6 +3,7 @@ Multiple setups with different fundingsources to choose from.
 
 - Postgres database
 - (optional) nginx reverse proxy with letsencrypt certificates
+- (optional) caddy reverse proxy with letsencrypt certificates
 
 
 ## Available fundingsources
@@ -29,6 +30,18 @@ cd docker
 cd fakewallet # or phoenixd
 docker compose up
 ```
+
+## Caddy
+IMPORTANT: be sure that your server is reachable from the internet and that you have a domain name pointing to your server.
+IMPORTANT: connect the caddy container to the same network as the lnbits container
+```sh
+cd caddy
+sh change_domain.sh mydomain.com
+docker compose up
+# use fakewallet_default or phoenixd_default
+docker network connect fakewallet_default caddy-caddy-1
+```
+
 
 ## Nginx
 

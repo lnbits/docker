@@ -1,0 +1,14 @@
+%domain% {
+  handle /api/v1/payments/sse* {
+    reverse_proxy lnbits:5100 {
+      header_up X-Forwarded-Host %domain%
+      transport http {
+         keepalive off
+         compression off
+      }
+    }
+  }
+  reverse_proxy lnbits:5100 {
+    header_up X-Forwarded-Host %domain%
+  }
+}

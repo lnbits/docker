@@ -1,0 +1,11 @@
+# https://caddyserver.com/docs/running#docker-compose
+services:
+  caddy:
+    image: caddy:2.9
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
