@@ -23,14 +23,14 @@ services:
     hostname: phoenixd
     restart: on-failure
     entrypoint: "./phoenixd --http-bind-ip=phoenixd --http-password=lnbits"
-    ports:
+    expose:
       - 9740:9740
     volumes:
       - phoenixd-data:/data
   postgres:
     image: postgres:latest
     restart: on-failure
-    ports:
+    expose:
       - 5432:5432
     environment:
       POSTGRES_USER: lnbits
