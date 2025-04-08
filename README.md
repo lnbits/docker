@@ -1,17 +1,17 @@
 # LNbits docker compose enviroments
 Multiple setups with different fundingsources to choose from.
 
-- postgres database
+- Postgres database
 - (optional) nginx reverse proxy with letsencrypt certificates
 
 
-## available fundingsources
+## Available fundingsources
 - FakeWallet
 - PhoenixWallet
 
 
 ## how to run with docker
-prerequisites (tested on ubuntu 22.04 LTS), install and start docker
+Prerequisites (tested on ubuntu 22.04 LTS), install and start docker
 ```sh
 sudo apt-get install docker.io docker-compose-v2
 # enable so docker starts on boot
@@ -21,7 +21,7 @@ sudo systemctl start docker
 # check if docker is running
 sudo systemctl status docker
 ```
-clone the repository and choose a setup
+Clone the repository and choose a setup
 ```sh
 git clone https://github.com/lnbits/docker
 cd docker
@@ -30,25 +30,25 @@ cd fakewallet # or phoenixd
 docker compose up
 ```
 
-## NGINX
+## Nginx
 
-### run the nginx webserver
+### Run the nginx webserver
 IMPORTANT: connect the nginx container to the same network as the lnbits container
 ```sh
 cd nginx
 docker compose up
 # use fakewallet_default or phoenixd_default
-docker network connect fakewallet_default nginx
+docker network connect fakewallet_default nginx-nginx-1
 ```
 
-### getting a certificate
+### Getting a certificate
 IMPORTANT: be sure that your server is reachable from the internet and that you have a domain name pointing to your server.
 ```sh
 cd nginx
 sh create_cert.sh mydomain.com
 ```
 
-### renewing a certificate
+### Renewing a certificate
 ```sh
 cd nginx
 sh renew_cert.sh mydomain.com
