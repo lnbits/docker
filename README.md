@@ -31,11 +31,16 @@ docker compose up
 ```
 
 ## NGINX
+
 ### run the nginx webserver
+IMPORTANT: connect the nginx container to the same network as the lnbits container
 ```sh
 cd nginx
 docker compose up
+# use fakewallet_default or phoenixd_default
+docker network connect fakewallet_default nginx
 ```
+
 ### getting a certificate
 IMPORTANT: be sure that your server is reachable from the internet and that you have a domain name pointing to your server.
 ```sh
