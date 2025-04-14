@@ -1,6 +1,6 @@
 services:
   lnbits:
-    image: lnbits/lnbits:v1.0.0-rc10
+    image: lnbits/lnbits
     hostname: lnbits
     depends_on:
       - postgres
